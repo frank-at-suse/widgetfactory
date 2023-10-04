@@ -23,4 +23,10 @@ FROM alpine:latest
 COPY --from=build /go/bin/widgetfactory /usr/local/bin
 COPY --from=app-build /app/dist /web
 
-ENTRYPOINT ["widgetfactory", "--static-content-path", "/web"]
+ENV MYSQL_HOST=mysql
+ENV MYSQL_USER=root
+ENV MYSQL_PASS=password
+ENV MYSQL_DB=widgets
+ENV MYSQL_PORT=3306
+
+ENTRYPOINT ["widgetfactory", "--dsn", "$MYSQL_USER:$MYSQL_PASS@tcp($MYSQL_HOST:$MYSQL_PORT)/$MYSQL_DB?parseTime=true", "--static-content-path", "/web"]

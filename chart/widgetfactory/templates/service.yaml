@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}
 spec:
+  selector:
+    app: {{ .Release.Name }}
   ports:
     - port: {{ .Values.widgetfactory.web.servicePort }}
       targetPort: {{ .Values.widgetfactory.web.containerPort }}
@@ -11,3 +13,15 @@ spec:
       targetPort: {{ .Values.widgetfactory.metrics.containerPort }}
       name: metrics
   type: {{ .Values.widgetfactory.serviceType }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-mysql
+spec:
+  selector:
+    app: {{ .Release.Name }}-mysql
+  ports:
+    - port: 3306
+      targetPort: 3306
+      name: mysql

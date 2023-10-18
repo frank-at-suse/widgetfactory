@@ -21,6 +21,8 @@ spec:
                 secretKeyRef:
                     name: {{ .Release.Name}}-mysql
                     key: mysql-root-password
+          - name: MYSQL_DATABASE
+            value: {{ .Release.Name }}
           ports:
           - containerPort: 3306
           {{- if .Values.database.persistence.enabled }}

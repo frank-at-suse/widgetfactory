@@ -29,4 +29,4 @@ ENV MYSQL_PASS=password
 ENV MYSQL_DB=widgets
 ENV MYSQL_PORT=3306
 
-ENTRYPOINT ["widgetfactory", "--dsn", "$MYSQL_USER:$MYSQL_PASS@tcp($MYSQL_HOST:$MYSQL_PORT)/$MYSQL_DB?parseTime=true", "--static-content-path", "/web"]
+ENTRYPOINT widgetfactory --dsn "$MYSQL_USER:$MYSQL_PASS@tcp($MYSQL_HOST:$MYSQL_PORT)/$MYSQL_DB?parseTime=true" --static-content-path /web

@@ -23,7 +23,7 @@ var (
 	orderTotalWidget = promauto.NewGaugeVec(prometheus.GaugeOpts{
 		Name: "total_widgets_on_order",
 		Help: "Total number of a specific type of widget currently on order",
-	}, []string{"widget_id"})
+	}, []string{"widget_id", "widget_name"})
 )
 
 func Start(db *database.DB, stopCh chan error) {
@@ -39,10 +39,10 @@ func Start(db *database.DB, stopCh chan error) {
 
 			totalOrdersMetric.Set(float64(len(orders)))
 
-			totals := map[int]int{}
+			totals := map[uint]int{}
 
 			for _, o := range orders {
-				totals[o.Widget] += o.Quantity
+				totals[uint(o.Widget)] += o.Quantity
 			}
 
 			widgets, err := db.ListWidgets()
@@ -50,10 +50,19 @@ func Start(db *database.DB, stopCh chan error) {
 				logrus.Errorf("error listing widgets: %s", err.Error())
 			}
 
+			widgetNames := map[uint]string{}
+
+			for _, w := range widgets {
+				widgetNames[w.ID] = w.Name
+			}
+
 			totalWidgetsMetric.Set(float64(len(widgets)))
 
 			for k, v := range totals {
-				orderTotalWidget.With(prometheus.Labels{"widget_id": fmt.Sprintf("%d", k)}).Set(float64(v))
+				orderTotalWidget.With(prometheus.Labels{
+					"widget_id":   fmt.Sprintf("%d", k),
+					"widget_name": widgetNames[k],
+				}).Set(float64(v))
 			}
 
 			time.Sleep(30 * time.Second)

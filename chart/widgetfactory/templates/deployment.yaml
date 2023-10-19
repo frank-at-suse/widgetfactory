@@ -5,12 +5,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: widgetfactory
+      app: {{ .Release.Name }}
   replicas: 1
   template:
     metadata:
       labels:
-        app: widgetfactory
+        app: {{ .Release.Name }}
     spec:
       containers:
         - name: widgetfactory

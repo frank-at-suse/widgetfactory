@@ -3,6 +3,7 @@ kind: StatefulSet
 metadata:
   name: {{ .Release.Name }}-mysql
 spec:
+  serviceName: {{ .Release.Name }}-mysql
   replicas: 1
   selector:
       matchLabels:

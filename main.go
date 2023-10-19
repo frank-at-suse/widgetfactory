@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"flag"
 	"github.com/ebauman/widgetfactory/database"
+	"github.com/ebauman/widgetfactory/metrics"
 	"github.com/ebauman/widgetfactory/web"
 	"github.com/gofiber/fiber/v2"
 	"github.com/prometheus/client_golang/prometheus"
@@ -64,6 +65,8 @@ func main() {
 	})
 
 	db := database.New(dsn)
+
+	go metrics.Start(db, stopCh)
 
 	svr := web.New(app, db, staticContentPath)
 

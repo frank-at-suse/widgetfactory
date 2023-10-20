@@ -11,13 +11,15 @@ spec:
           - backend:
               service:
                 name: {{ .Release.Name }}
-                port: {{ .Values.widgetfactory.web.servicePort }}
+                port:
+                  number: {{ .Values.widgetfactory.web.servicePort }}
             pathType: Prefix
             path: /
           - backend:
               service:
                 name: {{ .Release.Name }}
-                port: {{ .Values.widgetfactory.metrics.servicePort }}
+                port:
+                  number: {{ .Values.widgetfactory.metrics.servicePort }}
             pathType: Prefix
             path: /metrics
 {{ end -}}

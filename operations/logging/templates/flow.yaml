@@ -1,0 +1,16 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Flow
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  globalOutputRefs: []
+  localOutputRefs:
+    - {{ .Release.Name }}
+  match:
+    - select:
+        container_names: []
+        hosts: []
+        labels:
+          app: widget-factory
+          component: web-server

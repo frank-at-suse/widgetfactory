@@ -1,0 +1,4 @@
+metrics:
+  port:
+    name: metrics
+  path: /metrics

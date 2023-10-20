@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-syslog-streamer
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: syslog-streamer
+          image: {{ .Values.image  }}
+          ports:
+            - containerPort: {{ .Values.syslogPort.port }}
+              name: {{ .Values.syslogPort.name  }}
+              protocol: {{ .Values.syslogPort.protocol }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.syslogPort.port }}
+      name: {{ .Values.service.name }}
+  selector:
+    app: {{ .Release.Name }}

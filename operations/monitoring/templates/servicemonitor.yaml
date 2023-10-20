@@ -1,11 +1,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: widgetfactory
+  name: {{ .Release.Name }}
 spec:
   endpoints:
-    - path: /metrics
-      port: metrics
+    - path: {{ .Values.metrics.path }}
+      port: {{ .Values.metrics.port.name }}
   selector:
     matchLabels:
       app: widget-factory

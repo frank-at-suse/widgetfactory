@@ -1,0 +1,16 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Output
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  syslog:
+    buffer:
+      timekey: {{ .Values.buffer.timekey }}
+      timekey_wait: {{ .Values.buffer.timekey_wait }}
+    format:
+      type: json
+    host: {{ .Release.Name }}.{{.Release.Namespace}}.svc.cluster.local
+    insecure: true
+    port: {{ .Values.service.port }}
+    transport: {{ .Values.syslogPort.protocol }}

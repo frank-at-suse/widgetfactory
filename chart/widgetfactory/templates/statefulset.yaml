@@ -7,11 +7,13 @@ spec:
   replicas: 1
   selector:
       matchLabels:
-        app: {{ .Release.Name}}-mysql
+        app: widget-factory
+        component: database-server
   template:
     metadata:
         labels:
-            app: {{ .Release.Name}}-mysql
+            app: widget-factory
+            component: database-server
     spec:
         containers:
         - name: mysql

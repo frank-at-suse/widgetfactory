@@ -1,5 +1,5 @@
 widgetfactory:
-  image: ebauman/widgetfactory:v0.0.6
+  image: ebauman/widgetfactory:v0.0.7
   web:
     servicePort: 80
     containerPort: 8080

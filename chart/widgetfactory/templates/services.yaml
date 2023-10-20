@@ -26,7 +26,8 @@ metadata:
     component: database
 spec:
   selector:
-    app: {{ .Release.Name }}-mysql
+    app: widget-factory
+    component: database-server
   ports:
     - port: 3306
       targetPort: 3306

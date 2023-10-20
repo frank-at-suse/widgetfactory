@@ -30,7 +30,6 @@ spec:
               port: web
             failureThreshold: 1
             periodSeconds: 10
-            terminationGracePeriodSeconds: 60
           ports:
             - containerPort: {{ .Values.widgetfactory.web.containerPort }}
               name: web

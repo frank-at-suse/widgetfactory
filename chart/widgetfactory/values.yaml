@@ -22,5 +22,5 @@ database:
     servicePort: 3306
 
 ingress:
-  enabled: false
-  host: example.com
+  enabled: true
+  host: sslip.io

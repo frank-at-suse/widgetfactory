@@ -7,7 +7,8 @@ metadata:
     component: web-server
 spec:
   selector:
-    app: {{ .Release.Name }}
+    app: widget-factory
+    component: web-server
   ports:
     - port: {{ .Values.widgetfactory.web.servicePort }}
       targetPort: {{ .Values.widgetfactory.web.containerPort }}

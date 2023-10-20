@@ -31,5 +31,6 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.syslogPort.port }}
       name: {{ .Values.service.name }}
+      protocol: UDP
   selector:
     app: {{ .Release.Name }}

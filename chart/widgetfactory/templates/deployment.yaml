@@ -19,7 +19,14 @@ spec:
           image: {{ .Values.widgetfactory.image }}
           livenessProbe:
             httpGet:
-              path: /widgets
+              path: /widget
+              port: web
+            failureThreshold: 1
+            periodSeconds: 10
+            terminationGracePeriodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /widget
               port: web
             failureThreshold: 1
             periodSeconds: 10

@@ -6,6 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"time"
 )
 
 type DB struct {
@@ -13,9 +14,16 @@ type DB struct {
 }
 
 func New(dsn string) *DB {
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		logrus.Fatalf("failed to connect to database: %s", err.Error())
+	var db *gorm.DB
+	var err error
+	for {
+		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+		if err != nil {
+			logrus.Errorf("failed to connect to database: %s", err.Error())
+			time.Sleep(5 * time.Second)
+		} else {
+			break
+		}
 	}
 
 	if err := db.AutoMigrate(&types.Order{}, &types.Widget{}); err != nil {

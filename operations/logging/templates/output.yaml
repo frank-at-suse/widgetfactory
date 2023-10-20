@@ -13,4 +13,4 @@ spec:
     host: {{ .Release.Name }}.{{.Release.Namespace}}.svc.cluster.local
     insecure: true
     port: {{ .Values.service.port }}
-    transport: {{ .Values.syslogPort.protocol }}
+    transport: udp

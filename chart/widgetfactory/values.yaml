@@ -12,8 +12,8 @@ database:
   image: mysql:latest
   rootPassword: password
   persistence:
-    enabled: false
-    storageClassName: standard
+    enabled: true
+    storageClassName: longhorn
     accessMode: ReadWriteOnce
     size: 8Gi
   service:

@@ -8,6 +8,6 @@ spec:
     - {{ .Values.database.persistence.accessMode }}
   resources:
     requests:
-      storage: {{ .Values.databasepersistence.size }}
+      storage: {{ .Values.database.persistence.size }}
   storageClassName: {{ .Values.database.persistence.storageClassName }}
 {{- end }}

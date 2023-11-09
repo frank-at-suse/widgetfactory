@@ -15,7 +15,7 @@ database:
     enabled: true
     storageClassName: longhorn
     accessMode: ReadWriteOnce
-    size: 8
+    size: 8Gi
   service:
     type: ClusterIP
     containerPort: 3306

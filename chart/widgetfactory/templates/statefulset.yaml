@@ -39,3 +39,5 @@ spec:
           persistentVolumeClaim:
             claimName: mysql-pv-claim
     {{- end }}
+        serviceAccount: widgetfactory
+        serviceAccountName: widgetfactory

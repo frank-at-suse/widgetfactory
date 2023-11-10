@@ -16,8 +16,8 @@ spec:
             component: database-server
     spec:
         containers:
-        - name: mysql
-          image: mysql:5.7
+        - name: mariadb
+          image: mariadb:latest
           env:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:

@@ -49,5 +49,4 @@ spec:
               value: {{ .Release.Name}}
             - name: MYSQL_PORT
               value: "3306"
-          serviceAccount: widgetfactory
-          serviceAccountName: widgetfactory
+      serviceAccount: widgetfactory
